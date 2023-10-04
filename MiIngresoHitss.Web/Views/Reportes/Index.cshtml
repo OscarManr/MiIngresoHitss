@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MiIngresoHitss.Web.Models.Reportes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Reportes</h2>
+
+
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+@using (Html.BeginForm("Create", "Cliente", FormMethod.Post))
+{
+    <p>
+        @Html.ActionLink("Crear Reporte", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+
+}

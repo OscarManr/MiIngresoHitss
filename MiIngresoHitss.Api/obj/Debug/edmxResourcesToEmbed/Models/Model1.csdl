@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MiIngresoHitssModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="ClienteId" />
+    </Key>
+    <Property Name="ClienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Ventas" Relationship="Self.FK_Cliente_Venta" FromRole="Clientes" ToRole="Ventas" />
+  </EntityType>
+  <EntityType Name="ListasDePrecios">
+    <Key>
+      <PropertyRef Name="ListaPrecioId" />
+    </Key>
+    <Property Name="ListaPrecioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="ProductoId" />
+    </Key>
+    <Property Name="ProductoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Ventas" Relationship="Self.FK_Producto_Venta" FromRole="Productos" ToRole="Ventas" />
+  </EntityType>
+  <EntityType Name="Ventas">
+    <Key>
+      <PropertyRef Name="VentaId" />
+    </Key>
+    <Property Name="VentaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClienteId" Type="Int32" />
+    <Property Name="ProductoId" Type="Int32" />
+    <Property Name="FechaVenta" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Cliente_Venta" FromRole="Ventas" ToRole="Clientes" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_Producto_Venta" FromRole="Ventas" ToRole="Productos" />
+  </EntityType>
+  <EntityType Name="Reportes">
+    <Key>
+      <PropertyRef Name="FechaInicio" />
+      <PropertyRef Name="FechaFin" />
+    </Key>
+    <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <Association Name="FK_Cliente_Venta">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="ClienteId" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_Venta">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="ProductoId" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="ProductoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MiIngresoHitssEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+    <EntitySet Name="ListasDePrecios" EntityType="Self.ListasDePrecios" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" />
+    <EntitySet Name="Ventas" EntityType="Self.Ventas" />
+    <EntitySet Name="Reportes" EntityType="Self.Reportes" />
+    <AssociationSet Name="FK_Cliente_Venta" Association="Self.FK_Cliente_Venta">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_Venta" Association="Self.FK_Producto_Venta">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

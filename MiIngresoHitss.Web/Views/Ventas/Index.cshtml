@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MiIngresoHitss.Web.Models.Ventas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Compras</h2>
+
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaVenta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clientes.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productos.Nombre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaVenta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clientes.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Productos.Nombre)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.VentaId })" class="btn btn-primary">Editar</a>
+                <a href="@Url.Action("Details", new { id = item.VentaId })" class="btn btn-info">Detalles</a>
+                <a href="@Url.Action("Delete", new { id = item.VentaId })" class="btn btn-danger">Eliminar</a>
+
+            </td>
+
+
+        </tr>
+    }
+
+</table>
+
+
+    <p>
+        @Html.ActionLink("Crear Reporte", "Reporte", null, new { @class = "btn btn-primary" })
+    </p>
+
+
+@*@using (Html.BeginForm("Create", "Cliente", FormMethod.Post))
+    {
+        <p>
+            @Html.ActionLink("Crear ", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+
+    }*@

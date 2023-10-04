@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MiIngresoHitssModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Reportes">
+    <Key>
+      <PropertyRef Name="FechaInicio" />
+      <PropertyRef Name="FechaFin" />
+    </Key>
+    <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityContainer Name="MiIngresoHitssEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Reportes" EntityType="Self.Reportes" />
+  </EntityContainer>
+</Schema>

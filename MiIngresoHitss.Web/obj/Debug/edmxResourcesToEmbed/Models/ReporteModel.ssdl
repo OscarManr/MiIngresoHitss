@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MiIngresoHitssModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'MiIngresoHitss.dbo.Reportes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Reportes">
+    <Key>
+      <PropertyRef Name="FechaInicio" />
+      <PropertyRef Name="FechaFin" />
+    </Key>
+    <Property Name="FechaInicio" Type="date" Nullable="false" />
+    <Property Name="FechaFin" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="MiIngresoHitssModel1StoreContainer">
+    <EntitySet Name="Reportes" EntityType="Self.Reportes" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Reportes].[FechaInicio] AS [FechaInicio], 
+    [Reportes].[FechaFin] AS [FechaFin]
+    FROM [dbo].[Reportes] AS [Reportes]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
